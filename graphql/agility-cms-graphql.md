@@ -29,7 +29,19 @@ Both keys are available under **Settings > API Keys** in the Agility dashboard.
 
 ## Endpoint
 
-The GraphQL endpoint is instance-specific and accessed through the Agility dashboard. No single public endpoint URL is published; each instance has its own GraphQL endpoint tied to its GUID.
+The GraphQL endpoint is instance-specific and tied to the instance GUID. The pattern is:
+
+```
+https://api.aglty.io/{guid}/{fetch|preview}/{locale}/graphql
+```
+
+Regional variants are also available:
+- US (default): `https://api.aglty.io/{guid}/...`
+- Canada: `https://api-ca.aglty.io/{guid}/...`
+- EU: `https://api-eu.aglty.io/{guid}/...`
+- Australia: `https://api-aus.aglty.io/{guid}/...`
+
+The GraphQL IDE (Altair) is accessible from within your Agility instance under **Settings > API Keys > Explore GraphQL API**.
 
 ## Use Cases
 

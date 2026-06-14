@@ -1,0 +1,590 @@
+# Agility CMS GraphQL Schema
+#
+# Source: Derived from the official @agility/content-fetch SDK type definitions
+# https://github.com/agility/agility-content-fetch-js-sdk
+# Docs: https://agilitycms.com/docs/developers/graphql-api
+#
+# Notes:
+# - The GraphQL API covers Content (items and lists) only.
+# - Pages, Page Templates, and Page Modules are not supported via GraphQL.
+# - Each Agility instance generates a schema based on its content models,
+#   so the contentItem fields object is dynamic per instance.
+# - Authentication requires an API key header (Fetch or Preview).
+# - Endpoint pattern: https://api.aglty.io/{guid}/{fetch|preview}/{locale}/graphql
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Scalars
+# ─────────────────────────────────────────────────────────────────────────────
+
+scalar DateTime
+scalar JSON
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Enums
+# ─────────────────────────────────────────────────────────────────────────────
+
+"""
+The workflow state of a content item or page.
+1 = Staging, 2 = Published, 3 = Deleted, 4 = Approved,
+5 = AwaitingApproval, 6 = Declined, 7 = Unpublished
+"""
+enum ContentState {
+  STAGING
+  PUBLISHED
+  DELETED
+  APPROVED
+  AWAITING_APPROVAL
+  DECLINED
+  UNPUBLISHED
+}
+
+"""
+The type of a page in the sitemap.
+"""
+enum PageType {
+  static
+  dynamic
+  dynamic_node
+  link
+  folder
+}
+
+"""
+Sort direction for content list queries.
+"""
+enum SortDirection {
+  asc
+  desc
+}
+
+"""
+Filter comparison operators for content list queries.
+"""
+enum FilterOperator {
+  eq
+  ne
+  lt
+  lte
+  gt
+  gte
+  range
+  like
+  in
+  contains
+}
+
+"""
+Logic operator used to combine multiple filters.
+"""
+enum FilterLogicOperator {
+  AND
+  OR
+}
+
+"""
+HTTP redirect status code for URL redirections.
+"""
+enum RedirectStatusCode {
+  MOVED_PERMANENTLY
+  FOUND
+}
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Core Types
+# ─────────────────────────────────────────────────────────────────────────────
+
+"""
+System-level properties shared by content items and pages.
+"""
+type SystemProperties {
+  """Date and time the item was created."""
+  created: DateTime!
+
+  """Date and time the item was last modified."""
+  modified: DateTime!
+
+  """
+  Workflow state of the item.
+  1=Staging, 2=Published, 3=Deleted, 4=Approved,
+  5=AwaitingApproval, 6=Declined, 7=Unpublished
+  """
+  state: Int!
+
+  """Unique version identifier for this revision of the item."""
+  versionID: Int!
+}
+
+"""
+System-level properties specific to content items.
+"""
+type ContentItemProperties {
+  """Workflow state of the item."""
+  state: Int!
+
+  """Date and time the item was last modified."""
+  modified: DateTime!
+
+  """Unique version identifier for this revision of the item."""
+  versionID: Int!
+
+  """
+  Reference name of the content list this item belongs to.
+  """
+  referenceName: String!
+
+  """Name of the content model (definition) this item uses."""
+  definitionName: String!
+
+  """Display order of the item within the list."""
+  itemOrder: Int!
+}
+
+"""
+SEO metadata for a content item or page.
+Only returned for Dynamic Page Items.
+"""
+type SEOProperties {
+  """Meta description for search engines."""
+  metaDescription: String!
+
+  """Meta keywords for search engines."""
+  metaKeywords: String!
+
+  """Raw meta HTML injected into the page head."""
+  metaHTML: String!
+
+  """Whether this item should be visible in navigation menus."""
+  menuVisible: Boolean!
+
+  """Whether this item should be visible in the sitemap."""
+  sitemapVisible: Boolean!
+}
+
+"""
+Visibility settings for a sitemap node.
+"""
+type SitemapVisibility {
+  """If true, the page is shown in navigation menus."""
+  menu: Boolean!
+
+  """If true, the page is shown in the sitemap and accessible by robots."""
+  sitemap: Boolean!
+}
+
+"""
+A reference to a linked content item or list within a content zone.
+"""
+type ContentReference {
+  """The content ID of the referenced item."""
+  contentid: Int
+
+  """Whether this is a full list reference."""
+  fulllist: Boolean
+
+  """The reference name of the linked content list."""
+  referencename: String
+}
+
+# ─────────────────────────────────────────────────────────────────────────────
+# ContentItem
+# ─────────────────────────────────────────────────────────────────────────────
+
+"""
+A content item stored in Agility CMS.
+The fields object is dynamic per instance, shaped by the content model.
+"""
+type ContentItem {
+  """Unique identifier for the content item in this locale."""
+  contentID: Int!
+
+  """System-level metadata for the content item."""
+  properties: ContentItemProperties!
+
+  """
+  A key/value map of the content item's fields.
+  Field names and types are determined by the instance's content model.
+  Returned as JSON to accommodate the dynamic schema.
+  """
+  fields: JSON!
+
+  """
+  SEO metadata. Only populated for Dynamic Page Items.
+  """
+  seo: SEOProperties
+}
+
+"""
+A paginated list of content items.
+"""
+type ContentList {
+  """The page of items returned by this request. Default take is 10, max is 250."""
+  items: [ContentItem!]!
+
+  """Total number of items in the list across all pages."""
+  totalCount: Int!
+}
+
+# ─────────────────────────────────────────────────────────────────────────────
+# ContentZone
+# ─────────────────────────────────────────────────────────────────────────────
+
+"""
+A content zone on a page, containing a module and its associated content item.
+"""
+type ContentZone {
+  """The reference name of the module definition."""
+  module: String!
+
+  """The content item providing the module's data, or a content reference."""
+  item: ContentItem
+
+  """Optional custom data attached to the zone."""
+  customData: JSON
+}
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Page
+# ─────────────────────────────────────────────────────────────────────────────
+
+"""
+A page in Agility CMS, including its zones and modules.
+Note: Pages are not currently accessible via the GraphQL API;
+they are served by the REST Content Fetch API.
+"""
+type Page {
+  """Unique identifier for the page in this locale."""
+  pageID: Int!
+
+  """URL-friendly slug used to compose the page path."""
+  name: String!
+
+  """Full URL path for this page."""
+  path: String!
+
+  """Page title used for SEO and the browser tab."""
+  title: String!
+
+  """Alternate text field, often used for dynamic menu generation."""
+  menuText: String!
+
+  """Type of page."""
+  pageType: PageType!
+
+  """Name of the Page Template this page uses."""
+  templateName: String!
+
+  """Whether this page requires authentication."""
+  securePage: Boolean!
+
+  """System-level metadata for this page."""
+  properties: SystemProperties!
+
+  """
+  Dictionary of content zones keyed by zone name.
+  Each zone contains an array of module instances.
+  """
+  zones: JSON!
+
+  """Redirect destination if this is a link-type page."""
+  redirectUrl: String
+
+  """Content ID of the associated dynamic item for dynamic pages."""
+  dynamicItemContentID: Int
+
+  """Visibility settings for menus and sitemaps."""
+  visible: SitemapVisibility!
+
+  """SEO metadata for the page."""
+  seo: SEOProperties
+}
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Sitemap
+# ─────────────────────────────────────────────────────────────────────────────
+
+"""
+A single entry in a flat sitemap structure.
+"""
+type SitemapFlatItem {
+  """Unique identifier for this page in this locale."""
+  pageID: Int!
+
+  """Human-friendly page title."""
+  title: String!
+
+  """URL-friendly page name (slug)."""
+  name: String!
+
+  """Full URL path for the page."""
+  path: String!
+
+  """Alternate title, often used for menu text."""
+  menuText: String!
+
+  """Page type."""
+  pageType: PageType!
+
+  """System-level metadata."""
+  properties: SystemProperties!
+
+  """Redirect URL for link-type pages."""
+  redirectUrl: String
+
+  """Content ID of the associated dynamic item."""
+  dynamicItemContentID: Int
+
+  """Visibility settings."""
+  visible: SitemapVisibility!
+}
+
+"""
+A single node in a nested sitemap tree.
+"""
+type SitemapNestedItem {
+  """Unique identifier for this page in this locale."""
+  pageID: Int!
+
+  """Human-friendly page title."""
+  title: String!
+
+  """URL-friendly page name (slug)."""
+  name: String!
+
+  """Full URL path for the page."""
+  path: String!
+
+  """Alternate title, often used for menu text."""
+  menuText: String!
+
+  """Page type."""
+  pageType: PageType!
+
+  """System-level metadata."""
+  properties: SystemProperties!
+
+  """Redirect URL for link-type pages."""
+  redirectUrl: String
+
+  """Content ID of the associated dynamic item."""
+  dynamicItemContentID: Int
+
+  """Visibility settings."""
+  visible: SitemapVisibility!
+
+  """Child pages nested under this node."""
+  pages: [SitemapNestedItem!]
+}
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Media / Gallery
+# ─────────────────────────────────────────────────────────────────────────────
+
+"""
+Metadata for a media asset stored in Agility.
+"""
+type MediaItemMetaData {
+  """Title of the media asset."""
+  Title: String!
+
+  """Description of the media asset."""
+  Description: String!
+
+  """Link URL associated with the media asset."""
+  LinkUrl: String!
+
+  """Height of the media asset in pixels."""
+  pixelHeight: String!
+
+  """Width of the media asset in pixels."""
+  pixelWidth: String!
+}
+
+"""
+A media asset stored in the Agility media library.
+"""
+type MediaItem {
+  """Unique identifier for the media item."""
+  mediaID: Int!
+
+  """File name of the media asset."""
+  fileName: String!
+
+  """Public URL of the media asset."""
+  url: String!
+
+  """File size in bytes."""
+  size: Int!
+
+  """Date and time the asset was last modified."""
+  modifiedOn: DateTime!
+
+  """Additional metadata for the media asset."""
+  metaData: MediaItemMetaData!
+}
+
+"""
+A gallery of media items.
+"""
+type Gallery {
+  """Unique identifier for the gallery."""
+  galleryID: Int!
+
+  """Name of the gallery."""
+  name: String!
+
+  """Description of the gallery."""
+  description: String!
+
+  """Number of media items in the gallery."""
+  count: Int!
+
+  """Array of media items in the gallery."""
+  media: [MediaItem!]!
+}
+
+# ─────────────────────────────────────────────────────────────────────────────
+# URL Redirections
+# ─────────────────────────────────────────────────────────────────────────────
+
+"""
+A URL redirection rule configured in Agility CMS.
+"""
+type URLRedirection {
+  """Unique identifier for this redirection rule."""
+  id: Int!
+
+  """The URL path to redirect from."""
+  originUrl: String!
+
+  """The URL path or destination to redirect to."""
+  destinationUrl: String!
+
+  """HTTP status code for the redirect: 301 (permanent) or 302 (temporary)."""
+  statusCode: Int!
+}
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Sync Types
+# ─────────────────────────────────────────────────────────────────────────────
+
+"""
+Response from a content sync operation.
+"""
+type SyncContent {
+  """Continuation token for the next sync request. Empty when up to date."""
+  syncToken: Int!
+
+  """Content items returned in this sync batch."""
+  items: [ContentItem!]!
+}
+
+"""
+Response from a pages sync operation.
+"""
+type SyncPages {
+  """Continuation token for the next sync request. Empty when up to date."""
+  syncToken: Int!
+
+  """Pages returned in this sync batch."""
+  items: [Page!]!
+}
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Input Types
+# ─────────────────────────────────────────────────────────────────────────────
+
+"""
+A single filter condition for a content list query.
+"""
+input FilterInput {
+  """The field path to filter on, e.g. "fields.title" or "properties.modified"."""
+  property: String!
+
+  """The comparison operator."""
+  operator: FilterOperator!
+
+  """The value to compare against. Strings must be quoted."""
+  value: String!
+}
+
+"""
+Parameters for querying a single content item.
+"""
+input ContentItemInput {
+  """The unique content ID of the item."""
+  contentID: Int!
+
+  """The locale code, e.g. "en-us"."""
+  locale: String!
+
+  """Depth of linked content auto-resolution. Default 1."""
+  contentLinkDepth: Int
+
+  """Whether to expand all content link references. Default false."""
+  expandAllContentLinks: Boolean
+}
+
+"""
+Parameters for querying a content list.
+"""
+input ContentListInput {
+  """Reference name of the content list."""
+  referenceName: String!
+
+  """The locale code, e.g. "en-us"."""
+  locale: String!
+
+  """Maximum number of items to return. Default 10, max 250."""
+  take: Int
+
+  """Number of items to skip for pagination. Default 0."""
+  skip: Int
+
+  """Field path to sort by, e.g. "fields.title" or "properties.modified"."""
+  sort: String
+
+  """Sort direction."""
+  direction: SortDirection
+
+  """Array of filter conditions."""
+  filters: [FilterInput!]
+
+  """Logic operator for combining multiple filters. Default AND."""
+  filtersLogicOperator: FilterLogicOperator
+
+  """Plain text filter string for advanced expressions with brackets."""
+  filterString: String
+
+  """Depth of linked content auto-resolution. Default 1."""
+  contentLinkDepth: Int
+
+  """Whether to expand all content link references. Default false."""
+  expandAllContentLinks: Boolean
+}
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Query
+# ─────────────────────────────────────────────────────────────────────────────
+
+"""
+The root query type for the Agility CMS GraphQL API.
+
+Note: The GraphQL API covers Content (items and lists) queries only.
+Pages, Sitemaps, Galleries, URL Redirections, and Sync operations
+are available via the REST Content Fetch API at:
+  https://api.aglty.io/{guid}/{fetch|preview}/{locale}/
+
+Authentication: Pass your Fetch or Preview API key as a request header.
+"""
+type Query {
+  """
+  Retrieve a single content item by its content ID and locale.
+  """
+  contentItem(input: ContentItemInput!): ContentItem
+
+  """
+  Retrieve a paginated list of content items by list reference name.
+  Supports filtering, sorting, and pagination.
+  """
+  contentList(input: ContentListInput!): ContentList
+}
