@@ -1,0 +1,55 @@
+aid: agility-cms
+name: Agility CMS
+description: "Headless CMS with a GraphQL content API, page management, multi-site support, and integration SDKs for Next.js, Gatsby, Nuxt, and other frameworks."
+type: Index
+image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://agilitycms.com/
+baseURL: https://api.aglty.io
+created: 2026-06-14
+modified: 2026-06-14
+specificationVersion: '0.19'
+tags:
+  - GraphQL
+  - Headless CMS
+  - Content Management
+  - REST
+  - Multi-site
+apis:
+  - aid: agility-cms:api
+    name: Agility CMS API
+    description: "REST and GraphQL APIs for fetching, syncing, and managing content from Agility CMS, with CDN delivery across global and regional endpoints."
+    tags:
+      - GraphQL
+      - REST
+      - Content Fetch
+      - Content Management
+      - CDN
+    humanURL: https://agilitycms.com/docs/developers/content-fetch-api
+    baseURL: https://api.aglty.io
+    properties:
+      - url: https://agilitycms.com/docs/developers/content-fetch-api
+        type: Documentation
+      - url: https://agilitycms.com/docs/developers/graphql-api
+        type: Documentation
+      - url: graphql/agility-cms-graphql.md
+        type: GraphQL
+common:
+  - url: https://agilitycms.com/
+    type: Website
+  - url: https://agilitycms.com/docs
+    type: Documentation
+  - url: https://www.linkedin.com/company/agilitycms
+    type: LinkedIn
+  - url: https://github.com/agility
+    type: GitHubOrganization
+  - url: https://agilitycms.com/product/pricing
+    type: Pricing
+  - url: plans/agility-cms-plans.md
+    type: Plans
+  - url: rate-limits/agility-cms-rate-limits.md
+    type: RateLimits
+  - url: finops/agility-cms-finops.md
+    type: FinOps
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
