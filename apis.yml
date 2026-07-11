@@ -34,6 +34,12 @@ apis:
       - url: graphql/agility-cms-graphql.md
         type: GraphQL
 common:
+  - type: TrustCenter
+    url: security/agility-cms-trust-center.yml
+  - type: VulnerabilityDisclosure
+    url: security/agility-cms-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/agility-cms-domain-security.yml
   - url: https://agilitycms.com/
     type: Website
   - url: https://agilitycms.com/docs
@@ -50,6 +56,8 @@ common:
     type: RateLimits
   - url: finops/agility-cms-finops.md
     type: FinOps
+  - url: https://agilitycms.com/blog
+    type: Blog
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

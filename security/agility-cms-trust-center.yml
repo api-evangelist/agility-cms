@@ -1,0 +1,14 @@
+generated: '2026-07-11'
+method: searched
+probe: true
+source: https://agilitycms.com/security
+url: https://agilitycms.com/security
+certifications:
+- SOC 2
+- GDPR
+evidence:
+- source: https://agilitycms.com/security
+  keywords:
+  - soc 2
+  - trust center
+  - gdpr
