@@ -2,7 +2,18 @@ aid: agility-cms
 name: Agility CMS
 description: "Headless CMS with a GraphQL content API, page management, multi-site support, and integration SDKs for Next.js, Gatsby, Nuxt, and other frameworks."
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: unknown
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Unknown
+  confidence: low
+  source: []
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/agility-cms.png
 url: https://agilitycms.com/
 baseURL: https://api.aglty.io
 created: 2026-06-14
