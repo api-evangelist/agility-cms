@@ -24,6 +24,12 @@ tags:
   - Headless CMS
   - Content Management
   - REST
+  - Multi-Site
+tags_raw:
+  - GraphQL
+  - Headless CMS
+  - Content Management
+  - REST
   - Multi-site
 apis:
   - aid: agility-cms:api
