@@ -2,6 +2,17 @@ aid: agility-cms
 name: Agility CMS
 description: "Headless CMS with a GraphQL content API, page management, multi-site support, and integration SDKs for Next.js, Gatsby, Nuxt, and other frameworks."
 type: Index
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: unknown
   onboarding: unknown
