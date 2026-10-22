@@ -55,10 +55,49 @@ edges:
   - namespace-domain
   detected_by: sweep-agent-tools.py
   first_seen: '2026-10-14'
+- partner_name: Netlify (own)
+  partner: netlify
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://www.netlify.com/integrations/agility-cms/
+  mirror_of: netlify/integrations/netlify-integration-edges.yml
+  apps:
+  - Agility CMS
+  - Agility CMS Setup Guide
+  listing_count: 1
+  detected: '2026-10-22'
+  detected_by: mirror-platform-listings.py
+  category: CMS
+  partner_tier: listing
+- partner_name: Vercel (own)
+  partner: vercel
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://vercel.com/marketplace/agility-cms
+  mirror_of: vercel/integrations/vercel-integration-edges.yml
+  apps:
+  - Agility CMS
+  listing_count: 1
+  detected: '2026-10-22'
+  detected_by: mirror-platform-listings.py
+  category: CMS
+  partner_tier: third-party
 generated: '2026-10-14'
 method: searched
 checked:
 - https://registry.modelcontextprotocol.io/v0/servers
 - https://zapier.com/api/v4/apps/
+- netlify/integrations/netlify-integration-edges.yml
+- vercel/integrations/vercel-integration-edges.yml
 source:
 - https://zapier.com/api/v4/apps/
