@@ -64,31 +64,95 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Enterprise headless CMS for marketing and developer teams. Agility CMS delivers content via REST and GraphQL APIs with CDN-backed global delivery, page management, multi-site support, and SDKs for Next.js, Gatsby, Nuxt, Astro, and .NET.
+Headless CMS with a GraphQL content API, page management, multi-site support, and integration SDKs for Next.js, Gatsby, Nuxt, and other frameworks.
 
-- **Website**: https://agilitycms.com/
-- **Documentation**: https://agilitycms.com/docs
-- **Pricing**: https://agilitycms.com/product/pricing
-- **GitHub**: https://github.com/agility
-- **LinkedIn**: https://www.linkedin.com/company/agilitycms
+**Areas:** GraphQL · Headless CMS · Content Management · REST · Multi-Site
 
-## APIs
+## Agility CMS on APIs.io
 
-- **Content Fetch API (REST)**: `https://api.aglty.io/{guid}/{apitype}` — fetch content items, lists, pages, and sitemaps over CDN
-- **GraphQL API**: Instance-specific endpoint accessible via Settings > API Keys in the Agility dashboard
-- **Content Sync API**: Bulk content sync for build-time (SSG) workflows
-- **Content Management API**: Programmatic content and asset creation/updates
+Everything profiled for Agility CMS is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/agility-cms/](https://apis.io/providers/agility-cms/)** — or go straight to one of the APIs or properties below.
 
-## Repository Contents
+### APIs (1)
 
-| Path | Description |
-|------|-------------|
-| `apis.yml` | APIs.io index for Agility CMS |
-| `plans/agility-cms-plans.md` | Pricing plan details (Starter, Pro, Enterprise, Free) |
-| `rate-limits/agility-cms-rate-limits.md` | API rate limit documentation (10 req/s direct; CDN uncapped) |
-| `finops/agility-cms-finops.md` | FinOps guidance for cost optimization |
-| `graphql/agility-cms-graphql.md` | GraphQL API reference notes |
+- [Agility CMS API](https://apis.io/apis/agility-cms/api/) — REST and GraphQL APIs for fetching, syncing, and managing content from Agility CMS, with CDN delivery across global and regional endpoints.
 
-## Maintainer
+### Published properties
 
-Kin Lane — kin@apievangelist.com
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### GraphQL (1)
+
+GraphQL schemas.
+
+- [Agility CMS GraphQL API](https://apis.io/graphqls/agility-cms/agility-cms-graphql/)
+
+#### Security (3)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Agility Cms Domain Security](https://apis.io/security/agility-cms/agility-cms-domain-security/)
+- [Agility Cms Trust Center](https://apis.io/security/agility-cms/agility-cms-trust-center/)
+- [Agility Cms Vulnerability Disclosure](https://apis.io/security/agility-cms/agility-cms-vulnerability-disclosure/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://agilitycms.com/)
+- [Documentation](https://agilitycms.com/docs)
+- [Pricing](https://agilitycms.com/product/pricing)
+- [Blog](https://agilitycms.com/blog)
+- [GitHub](https://github.com/agility)
+
+## API Evangelist rating
+
+**Kin Score 23.3** — emerging · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 64.3 |
+| Contract quality | 39.4 |
+| Contract governance | 0.0 |
+| Operational transparency | 5.3 |
+| Developer ergonomics | 11.9 |
+| Access clarity | 18.4 |
+
+**Agent readiness 15.5** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | — |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 16.7** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/agility-cms/](https://apis.io/providers/agility-cms/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Agility CMS: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/agility-cms/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
