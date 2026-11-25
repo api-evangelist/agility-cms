@@ -90,9 +90,9 @@ GraphQL schemas.
 
 Authentication, trust centre, and vulnerability disclosure.
 
-- [Agility Cms Domain Security](https://apis.io/security/agility-cms/agility-cms-domain-security/)
-- [Agility Cms Trust Center](https://apis.io/security/agility-cms/agility-cms-trust-center/)
-- [Agility Cms Vulnerability Disclosure](https://apis.io/security/agility-cms/agility-cms-vulnerability-disclosure/)
+- [Agility CMS Domain Security](https://apis.io/security/agility-cms/agility-cms-domain-security/)
+- [Agility CMS Trust Center](https://apis.io/security/agility-cms/agility-cms-trust-center/)
+- [Agility CMS Vulnerability Disclosure](https://apis.io/security/agility-cms/agility-cms-vulnerability-disclosure/)
 
 ## Where to find this API
 
@@ -106,18 +106,18 @@ Links to the company's own pages. This repository publishes no copy of their spe
 
 ## API Evangelist rating
 
-**Kin Score 23.3** — emerging · rubric 0.24.0 · scored 2026-10-17
+**Kin Score 25.3** — emerging · rubric 0.28.1 · scored 2026-11-21
 
 | Facet | Score |
 |---|---|
-| Discoverability | 64.3 |
+| Discoverability | 71.4 |
 | Contract quality | 39.4 |
 | Contract governance | 0.0 |
-| Operational transparency | 5.3 |
+| Operational transparency | 14.3 |
 | Developer ergonomics | 11.9 |
-| Access clarity | 18.4 |
+| Access clarity | 19.1 |
 
-**Agent readiness 15.5** — agent-aware
+**Agent readiness 15.1** — agent-aware
 
 | Agent-readiness dimension | Result |
 |---|---|
@@ -140,6 +140,12 @@ Links to the company's own pages. This repository publishes no copy of their spe
 | Protected Resource Metadata | — |
 | Dynamic Client Registration | — |
 | Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | na |
+| MCP Tool Quality | na |
+| Onboarding Descriptor | — |
+| Dns Aid Index | na |
+| Markdown Negotiation | na |
 
 **Regulatory alignment 16.7** — Horizontal (data, software, accessibility, platform)
 
